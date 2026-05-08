@@ -105,11 +105,11 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
       <ParticleBackground />
       {/* Animated gradient backdrop */}
       <div className="pointer-events-none fixed inset-0 -z-20 bg-[var(--gradient-bg)] bg-[length:200%_200%] animate-gradient-shift" />
-      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(ellipse_at_top,rgba(120,80,255,0.25),transparent_60%)]" />
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--neon-purple)_22%,transparent),transparent_60%)]" />
 
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:py-14">
         {/* Hero */}
@@ -117,10 +117,12 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
           <button
             onClick={onToggleDark}
             aria-label="Toggle dark mode"
-            className="absolute right-0 top-0 inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-foreground backdrop-blur-md transition hover:border-[var(--neon-cyan)]/60 hover:text-[var(--neon-cyan)]"
+            className="absolute right-0 top-0 inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-foreground backdrop-blur-md transition hover:border-[var(--neon-cyan)] hover:text-[var(--neon-cyan)] hover:shadow-[var(--glow-cyan)]"
           >
             {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            <span className="hidden sm:inline">Dark Mode Operation</span>
+            <span className="hidden sm:inline">
+              {isDark ? "Light Mode" : "Dark Mode"} Operation
+            </span>
           </button>
           <div className="mb-4 flex items-center justify-center gap-3 text-2xl">
             <span className="text-[var(--neon-pink)] drop-shadow-[0_0_10px_var(--neon-pink)] animate-pulse-glow">△</span>
@@ -129,25 +131,28 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
             <span className="text-[var(--neon-cyan)] drop-shadow-[0_0_10px_var(--neon-cyan)] animate-pulse-glow [animation-delay:0.6s]">□</span>
           </div>
           <h1 className="font-display text-4xl font-black uppercase tracking-tight sm:text-7xl">
-            <span className="bg-gradient-to-r from-[var(--neon-cyan)] via-[var(--neon-purple)] to-[var(--neon-pink)] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(120,200,255,0.35)]">
+            <span className="bg-[var(--gradient-neon)] bg-clip-text text-transparent drop-shadow-[0_0_30px_color-mix(in_oklab,var(--neon-cyan)_45%,transparent)]">
               PlayStation
             </span>
             <br />
-            <span className="bg-gradient-to-r from-[var(--neon-pink)] via-[var(--neon-cyan)] to-[var(--neon-purple)] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,120,220,0.4)]">
+            <span className="bg-gradient-to-r from-[var(--neon-pink)] via-[var(--neon-cyan)] to-[var(--neon-purple)] bg-clip-text text-transparent drop-shadow-[0_0_30px_color-mix(in_oklab,var(--neon-pink)_45%,transparent)]">
               Team Generator
             </span>
           </h1>
         </header>
 
         {/* Players panel */}
-        <section className="mt-10 rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-5 backdrop-blur-xl sm:p-7 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]">
+        <section
+          className="mt-12 rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-5 backdrop-blur-xl sm:p-7"
+          style={{ boxShadow: "var(--shadow-elegant)" }}
+        >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <Users className="h-5 w-5 text-[var(--neon-cyan)]" />
               <h2 className="font-display text-lg font-bold uppercase tracking-wider text-foreground">
                 Players
               </h2>
-              <span className="ml-2 rounded-full border border-[var(--neon-cyan)]/40 bg-[var(--neon-cyan)]/10 px-2.5 py-0.5 text-xs font-bold text-[var(--neon-cyan)]">
+              <span className="ml-2 rounded-full border border-[var(--neon-cyan)]/40 bg-[color-mix(in_oklab,var(--neon-cyan)_15%,transparent)] px-2.5 py-0.5 text-xs font-bold text-[var(--neon-cyan)]">
                 {selectedCount} / {players.length} selected
               </span>
             </div>
@@ -155,7 +160,7 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
               <Button
                 size="sm"
                 variant="ghost"
-                className="text-xs hover:bg-[var(--neon-cyan)]/10 hover:text-[var(--neon-cyan)]"
+                className="text-xs text-foreground hover:bg-[color-mix(in_oklab,var(--neon-cyan)_15%,transparent)] hover:text-[var(--neon-cyan)]"
                 onClick={selectAll}
               >
                 Select all
@@ -163,7 +168,7 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
               <Button
                 size="sm"
                 variant="ghost"
-                className="text-xs hover:bg-destructive/10 hover:text-destructive"
+                className="text-xs text-foreground hover:bg-destructive/15 hover:text-destructive"
                 onClick={clearAll}
               >
                 Clear
@@ -171,7 +176,7 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {players.map((p) => (
               <PlayerCard
                 key={p}
@@ -192,11 +197,11 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
                 if (e.key === "Enter") addPlayer();
               }}
               placeholder="Add a new player..."
-              className="h-11 border-white/15 bg-white/5 text-base placeholder:text-muted-foreground/70 focus-visible:border-[var(--neon-cyan)] focus-visible:ring-[var(--neon-cyan)]/30"
+              className="h-11 border-border bg-[var(--glass-strong)] text-base text-foreground placeholder:text-muted-foreground focus-visible:border-[var(--neon-cyan)] focus-visible:ring-[var(--neon-cyan)]/30"
             />
             <Button
               onClick={addPlayer}
-              className="h-11 gap-2 bg-[var(--neon-cyan)]/15 text-[var(--neon-cyan)] border border-[var(--neon-cyan)]/40 hover:bg-[var(--neon-cyan)]/25 hover:shadow-[var(--glow-cyan)]"
+              className="h-11 gap-2 border border-[var(--neon-cyan)]/50 bg-[color-mix(in_oklab,var(--neon-cyan)_18%,transparent)] text-[var(--neon-cyan)] hover:bg-[color-mix(in_oklab,var(--neon-cyan)_28%,transparent)] hover:shadow-[var(--glow-cyan)]"
             >
               <Plus className="h-4 w-4" /> Add
             </Button>
@@ -204,26 +209,30 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
         </section>
 
         {/* Generate button */}
-        <div className="mt-8 flex flex-col items-center gap-4">
+        <div className="mt-10 flex flex-col items-center gap-4">
           <button
             onClick={generate}
             disabled={!canGenerate}
-            className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl px-10 font-display text-base font-extrabold uppercase tracking-widest text-white transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:h-16 sm:text-lg"
+            className={`group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl px-10 font-display text-base font-extrabold uppercase tracking-widest transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 sm:h-16 sm:text-lg ${
+              canGenerate ? "animate-glow-breathe" : ""
+            }`}
             style={{
-              background:
-                "linear-gradient(120deg, var(--neon-purple), var(--neon-cyan), var(--neon-pink), var(--neon-purple))",
+              background: "var(--gradient-neon)",
               backgroundSize: "300% 300%",
-              animation: canGenerate ? "gradient-shift 4s ease infinite" : undefined,
-              boxShadow: canGenerate
-                ? "0 0 40px -8px var(--neon-purple), 0 0 80px -20px var(--neon-cyan)"
-                : "none",
+              animation: canGenerate
+                ? "gradient-shift 4s ease infinite, glow-breathe 3.5s ease-in-out infinite"
+                : undefined,
+              color: "var(--gen-btn-text)",
             }}
           >
-            <span className="absolute inset-[2px] rounded-[14px] bg-[oklch(0.13_0.05_270)]/85 backdrop-blur-md transition group-hover:bg-[oklch(0.13_0.05_270)]/65" />
+            <span
+              className="absolute inset-[2px] rounded-[14px] backdrop-blur-md transition group-hover:opacity-70"
+              style={{ background: "var(--gen-btn-inner)" }}
+            />
             <span className="relative flex items-center gap-3">
               {isGenerating ? (
                 <>
-                  <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-current/30 border-t-current" />
                   Shuffling players…
                 </>
               ) : (
@@ -239,13 +248,13 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
             <div className="flex flex-wrap items-center justify-center gap-2">
               <Button
                 onClick={generate}
-                className="gap-2 border border-[var(--neon-purple)] bg-[var(--neon-purple)] font-bold text-white hover:bg-[var(--neon-purple)]/90 hover:shadow-[var(--glow-purple)]"
+                className="gap-2 border border-[var(--neon-purple)] bg-[var(--neon-purple)] font-bold text-[var(--neon-ink)] hover:bg-[var(--neon-purple)]/90 hover:shadow-[var(--glow-purple)]"
               >
                 <RefreshCw className="h-4 w-4" /> Regenerate
               </Button>
               <Button
                 onClick={copyTeams}
-                className="gap-2 border border-[var(--neon-cyan)] bg-[var(--neon-cyan)] font-bold text-[oklch(0.13_0.05_270)] hover:bg-[var(--neon-cyan)]/90 hover:shadow-[var(--glow-cyan)]"
+                className="gap-2 border border-[var(--neon-cyan)] bg-[var(--neon-cyan)] font-bold text-[var(--neon-ink)] hover:bg-[var(--neon-cyan)]/90 hover:shadow-[var(--glow-cyan)]"
               >
                 <Copy className="h-4 w-4" /> Copy teams
               </Button>
