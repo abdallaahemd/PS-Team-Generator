@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { TeamGenerator } from "@/components/team-generator/TeamGenerator";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -25,10 +26,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [isDark, setIsDark] = useState(true);
   return (
-    <div className="dark">
-      <TeamGenerator />
-      <Toaster theme="dark" position="top-center" richColors />
+    <div className={isDark ? "dark" : ""}>
+      <TeamGenerator isDark={isDark} onToggleDark={() => setIsDark((v) => !v)} />
+      <Toaster theme={isDark ? "dark" : "light"} position="top-center" richColors />
     </div>
   );
 }
