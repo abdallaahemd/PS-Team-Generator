@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "الريف الريف" },
+      { name: "description", content: "موقع مصمم لسهره الخميس 🎮" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "الريف الريف" },
+      { property: "og:description", content: "موقع مصمم لسهره الخميس 🎮" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "الريف الريف" },
+      { name: "twitter:description", content: "موقع مصمم لسهره الخميس 🎮" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2b591205-2db8-45ca-b6cd-5b50a7d1ef04/id-preview-ff1d4a41--c81867d2-93b0-4b25-8f28-2581eea322fb.lovable.app-1778259034658.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2b591205-2db8-45ca-b6cd-5b50a7d1ef04/id-preview-ff1d4a41--c81867d2-93b0-4b25-8f28-2581eea322fb.lovable.app-1778259034658.png" },
     ],
     links: [
       {
