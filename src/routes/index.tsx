@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TeamGenerator } from "@/components/team-generator/TeamGenerator";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -27,10 +27,30 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [isDark, setIsDark] = useState(true);
+
+  // Hydrate from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("ps-theme");
+      if (stored === "light") setIsDark(false);
+      else if (stored === "dark") setIsDark(true);
+    } catch {}
+  }, []);
+
+  // Apply globally to <html> so body + tokens cascade to entire page
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) root.classList.add("dark");
+    else root.classList.remove("dark");
+    try {
+      localStorage.setItem("ps-theme", isDark ? "dark" : "light");
+    } catch {}
+  }, [isDark]);
+
   return (
-    <div className={isDark ? "dark" : ""}>
+    <>
       <TeamGenerator isDark={isDark} onToggleDark={() => setIsDark((v) => !v)} />
       <Toaster theme={isDark ? "dark" : "light"} position="top-center" richColors />
-    </div>
+    </>
   );
 }
