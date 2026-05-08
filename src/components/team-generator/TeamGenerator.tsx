@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Copy, RefreshCw, Sparkles, Plus, Users } from "lucide-react";
+import { Copy, RefreshCw, Sparkles, Plus, Users, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ARABIC_TEAM_NAMES, DEFAULT_PLAYERS } from "./data";
@@ -12,7 +12,9 @@ import { ParticleBackground } from "./ParticleBackground";
 
 type Team = { name: string; members: string[] };
 
-export function TeamGenerator() {
+type TeamGeneratorProps = { isDark: boolean; onToggleDark: () => void };
+
+export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
   const [players, setPlayers] = useState<string[]>(DEFAULT_PLAYERS);
   const [selected, setSelected] = useState<Set<string>>(new Set(DEFAULT_PLAYERS));
   const [newName, setNewName] = useState("");
@@ -111,24 +113,30 @@ export function TeamGenerator() {
 
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:py-14">
         {/* Hero */}
-        <header className="text-center">
+        <header className="relative text-center">
+          <button
+            onClick={onToggleDark}
+            aria-label="Toggle dark mode"
+            className="absolute right-0 top-0 inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-foreground backdrop-blur-md transition hover:border-[var(--neon-cyan)]/60 hover:text-[var(--neon-cyan)]"
+          >
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            <span className="hidden sm:inline">Dark Mode Operation</span>
+          </button>
           <div className="mb-4 flex items-center justify-center gap-3 text-2xl">
             <span className="text-[var(--neon-pink)] drop-shadow-[0_0_10px_var(--neon-pink)] animate-pulse-glow">△</span>
             <span className="text-[var(--neon-cyan)] drop-shadow-[0_0_10px_var(--neon-cyan)] animate-pulse-glow [animation-delay:0.2s]">○</span>
             <span className="text-[var(--neon-purple)] drop-shadow-[0_0_10px_var(--neon-purple)] animate-pulse-glow [animation-delay:0.4s]">✕</span>
             <span className="text-[var(--neon-cyan)] drop-shadow-[0_0_10px_var(--neon-cyan)] animate-pulse-glow [animation-delay:0.6s]">□</span>
           </div>
-          <h1 className="font-display text-4xl font-black uppercase tracking-tight sm:text-6xl">
+          <h1 className="font-display text-4xl font-black uppercase tracking-tight sm:text-7xl">
             <span className="bg-gradient-to-r from-[var(--neon-cyan)] via-[var(--neon-purple)] to-[var(--neon-pink)] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(120,200,255,0.35)]">
               PlayStation
             </span>
             <br />
-            <span className="text-foreground">Team Generator</span>
+            <span className="bg-gradient-to-r from-[var(--neon-pink)] via-[var(--neon-cyan)] to-[var(--neon-purple)] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,120,220,0.4)]">
+              Team Generator
+            </span>
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-            Pick your squad, hit generate, and let fate decide the duos.
-            Each team gets a chaotic Arabic name. Good luck — you'll need it.
-          </p>
         </header>
 
         {/* Players panel */}
@@ -230,16 +238,14 @@ export function TeamGenerator() {
           {teams.length > 0 && !isGenerating && (
             <div className="flex flex-wrap items-center justify-center gap-2">
               <Button
-                variant="outline"
                 onClick={generate}
-                className="gap-2 border-[var(--neon-purple)]/50 bg-[var(--neon-purple)]/10 text-foreground hover:bg-[var(--neon-purple)]/20 hover:shadow-[var(--glow-purple)]"
+                className="gap-2 border border-[var(--neon-purple)] bg-[var(--neon-purple)] font-bold text-white hover:bg-[var(--neon-purple)]/90 hover:shadow-[var(--glow-purple)]"
               >
                 <RefreshCw className="h-4 w-4" /> Regenerate
               </Button>
               <Button
-                variant="outline"
                 onClick={copyTeams}
-                className="gap-2 border-[var(--neon-cyan)]/50 bg-[var(--neon-cyan)]/10 text-foreground hover:bg-[var(--neon-cyan)]/20 hover:shadow-[var(--glow-cyan)]"
+                className="gap-2 border border-[var(--neon-cyan)] bg-[var(--neon-cyan)] font-bold text-[oklch(0.13_0.05_270)] hover:bg-[var(--neon-cyan)]/90 hover:shadow-[var(--glow-cyan)]"
               >
                 <Copy className="h-4 w-4" /> Copy teams
               </Button>
