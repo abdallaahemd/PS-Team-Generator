@@ -48,7 +48,7 @@ export function TeamCard({ name, members, index }: Props) {
           {members.map((m, i) => (
             <li
               key={m + i}
-              className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-foreground"
+              className="flex items-center gap-2 rounded-lg border border-[var(--glass-border)] bg-[var(--glass-strong)] px-3 py-2 text-sm font-medium text-foreground"
             >
               <span
                 className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[11px] font-black"
