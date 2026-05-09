@@ -9,10 +9,7 @@ export const DEFAULT_PLAYERS = [
   "Mostafa Elmalek",
   "Mohamed Khaled",
   "Elsayed Diab",
-  "Mohab Foda",
   "Mohamed Sanad",
-  "Saad Hamdy",
-  "Ahmed Kamal",
 ];
 
 export const ARABIC_TEAM_NAMES = [
@@ -66,4 +63,8 @@ export const ARABIC_TEAM_NAMES = [
   "شلة الفنشات",
   "هنخش نسلم ونمشي",
   "جمهورية النوبز العظمى",
+  "خد فطيرك",
+  "درجن درجن",
+  "شرمط و مرمط",
+  "هنشتم بس",
 ];

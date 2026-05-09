@@ -14,13 +14,13 @@ export function PlayerCard({ name, selected, onToggle, onRemove }: Props) {
       role="switch"
       aria-checked={selected}
       onClick={onToggle}
-      className={`group relative flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left transition-all duration-200 hover:scale-[1.02] hover:shadow-[var(--shadow-sm)] ${
+      className={`group relative flex w-full items-center justify-between gap-2 rounded-xl px-3 py-3 text-left transition-all duration-200 hover:scale-[1.02] hover:shadow-[var(--shadow-sm)] sm:py-2.5 ${
         selected
           ? "gradient-border"
           : "border border-[var(--border)] bg-[var(--surface)] hover:border-[color-mix(in_oklab,var(--primary)_40%,var(--border))]"
       }`}
     >
-      <div className="flex min-w-0 items-center gap-2.5">
+      <div className="flex min-w-0 flex-1 items-center gap-2.5">
         <span
           className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md transition ${
             selected
@@ -31,7 +31,9 @@ export function PlayerCard({ name, selected, onToggle, onRemove }: Props) {
         >
           <Check className="h-3 w-3" strokeWidth={3} />
         </span>
-        <span className="truncate text-sm font-medium text-foreground">{name}</span>
+        <span className="min-w-0 flex-1 break-words text-[13px] font-medium leading-snug text-foreground sm:text-sm">
+          {name}
+        </span>
       </div>
       <span
         role="button"

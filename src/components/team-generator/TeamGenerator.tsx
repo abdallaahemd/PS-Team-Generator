@@ -16,7 +16,7 @@ type TeamGeneratorProps = { isDark: boolean; onToggleDark: () => void };
 
 export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
   const [players, setPlayers] = useState<string[]>(DEFAULT_PLAYERS);
-  const [selected, setSelected] = useState<Set<string>>(new Set(DEFAULT_PLAYERS));
+  const [selected, setSelected] = useState<Set<string>>(new Set());
   const [newName, setNewName] = useState("");
   const [teams, setTeams] = useState<Team[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -105,7 +105,7 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <ParticleBackground />
       <div
         className="pointer-events-none fixed inset-0 -z-20"
@@ -207,7 +207,7 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="mt-5 grid grid-cols-1 gap-2.5 [@media(min-width:420px)]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {players.map((p) => (
               <PlayerCard
                 key={p}
