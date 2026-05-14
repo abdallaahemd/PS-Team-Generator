@@ -9,6 +9,7 @@ import { playGenerateSound } from "@/lib/sfx";
 import { PlayerCard } from "./PlayerCard";
 import { TeamCard } from "./TeamCard";
 import { ParticleBackground } from "./ParticleBackground";
+import { TournamentBracket } from "./TournamentBracket";
 
 type Team = { name: string; members: string[] };
 
@@ -292,6 +293,10 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
               <TeamCard key={`${revealKey}-${i}`} index={i} name={t.name} members={t.members} />
             ))}
           </section>
+        )}
+
+        {teams.length > 0 && !isGenerating && (
+          <TournamentBracket teams={teams} revealKey={revealKey} />
         )}
 
         <footer className="mt-16 text-center text-xs text-muted-foreground">
