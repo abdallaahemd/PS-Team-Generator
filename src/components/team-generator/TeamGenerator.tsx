@@ -295,6 +295,10 @@ export function TeamGenerator({ isDark, onToggleDark }: TeamGeneratorProps) {
           </section>
         )}
 
+        {teams.length > 0 && !isGenerating && (
+          <TournamentBracket teams={teams} revealKey={revealKey} />
+        )}
+
         <footer className="mt-16 text-center text-xs text-muted-foreground">
           Built for late-night PS sessions · May the duos be ever in your favor
         </footer>
