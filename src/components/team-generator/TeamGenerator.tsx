@@ -9,6 +9,7 @@ import { playGenerateSound } from "@/lib/sfx";
 import { PlayerCard } from "./PlayerCard";
 import { TeamCard } from "./TeamCard";
 import { ParticleBackground } from "./ParticleBackground";
+import { TournamentBracket } from "./TournamentBracket";
 
 type Team = { name: string; members: string[] };
 
